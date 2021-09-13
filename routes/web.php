@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/api/flyers.json', [FlyersController::class, 'getAll'])->middleware('verifyFields','verifyFilters');
+
+Route::get('/api/flyers/{id}.json', [FlyersController::class, 'getOne'])->middleware('verifyFields');
