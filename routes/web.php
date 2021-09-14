@@ -14,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Http\Controllers\FlyersController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/api/flyers.json', [FlyersController::class, 'getAll'])->middleware('verifyFields','verifyFilters');
 
 Route::get('/api/flyers/{id}.json', [FlyersController::class, 'getOne'])->middleware('verifyFields');
+
+Route::fallback(function () {
+    return response()->json([
+        'success' => false,
+        'code' => 404,
+        'error' => [
+            'message' => 'Not Found',
+            'debug' => 'URL Not Found'
+        ]
+    ],404);
+});

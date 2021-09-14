@@ -11,7 +11,23 @@ use League\Csv\Statement;
 class FlyerRepository implements RepositoryInterface {
     
     public function all() {
-        return $this->getRecords();
+
+        $flyerArray = [];
+        $records = $this->getRecords();
+        
+        foreach ($records as $key => $flyerData) {
+            $flyer = new Flyer([
+                'id' => $flyerData["id"], 
+                'title' => $flyerData["title"], 
+                'start_date' => $flyerData["start_date"], 
+                'end_date' => $flyerData["end_date"], 
+                'is_published' => $flyerData["is_published"], 
+                'retailer' => $flyerData["retailer"], 
+                'category'=> $flyerData["category"]
+            ]);
+            $flyerArray[] = $flyer;
+        }
+        return $flyerArray;
     }
 
     public function find($id) {

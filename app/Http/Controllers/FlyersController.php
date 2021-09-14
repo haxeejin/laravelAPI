@@ -50,19 +50,11 @@ class FlyersController extends Controller
         $limit = (!is_numeric($limit) || $limit <= 0) ? $this->defaultLimit : $limit;
         
         //Loading flyers data
-        $records = $this->flyers->all();
+        $flyersArray = $this->flyers->all();
 
         //Looping through the data
-        foreach ($records as $flyerData) {
-            $flyer = new Flyer([
-                'id' => $flyerData["id"], 
-                'title' => $flyerData["title"], 
-                'start_date' => $flyerData["start_date"], 
-                'end_date' => $flyerData["end_date"], 
-                'is_published' => $flyerData["is_published"], 
-                'retailer' => $flyerData["retailer"], 
-                'category'=> $flyerData["category"]
-            ]);
+        foreach ($flyersArray as $flyer) {
+           
             if ($flyer->isActiveFlyer) {
 
                 //Applying filters
