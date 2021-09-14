@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface FlyerInterface{
+interface RepositoryInterface{
 
     public function all();
 

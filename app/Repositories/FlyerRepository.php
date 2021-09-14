@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Repositories\FlyerInterface;
+use App\Repositories\RepositoryInterface;
 use App\Models\Flyer;
 use League\Csv\Reader;
 use League\Csv\Statement;
 
 
-class FlyerRepository implements FlyerInterface {
+class FlyerRepository implements RepositoryInterface {
     
     public function all() {
         return $this->getRecords();

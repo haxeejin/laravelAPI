@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Flyer;
 use App\Repositories\FlyerRepository as FlyerRepository;
 use Illuminate\Http\Request;
-/* use League\Csv\Reader;
-use League\Csv\Statement; */
 
 
 class FlyersController extends Controller
@@ -52,7 +50,6 @@ class FlyersController extends Controller
         $limit = (!is_numeric($limit) || $limit <= 0) ? $this->defaultLimit : $limit;
         
         //Loading flyers data
-        //$records = $this->getCsvFlyers();
         $records = $this->flyers->all();
 
         //Looping through the data
@@ -115,42 +112,6 @@ class FlyersController extends Controller
 
     public function getOne(Request $request, $id){
         
-        //Loading flyers data 
-        //$records = $this->getCsvFlyers();
-        /* $records = $this->flyers->all(); */
-
-        //Searching the desired id
-        
-        /* $flyerFound = false;
-
-        foreach ($records as $flyerData) {
-            
-            if ($flyerData['id'] == $id) {
-                
-                $flyer = new Flyer([
-                    'id' => $flyerData["id"], 
-                    'title' => $flyerData["title"], 
-                    'start_date' => $flyerData["start_date"], 
-                    'end_date' => $flyerData["end_date"], 
-                    'is_published' => $flyerData["is_published"], 
-                    'retailer' => $flyerData["retailer"], 
-                    'category'=> $flyerData["category"]
-                ]);
-
-                //filtering fields
-                if (count($this->fieldsToHide) > 0) {
-                    foreach ($this->fieldsToHide as $fieldToHide) {
-                        $flyer->makeHidden($fieldToHide)->toArray();
-                    }
-                }
-                
-                $flyerFound = true;
-                break;
-            }
-        }
-        */
-        //Preparing response
-       /*  if ($flyerFound) { */
         $flyer = $this->flyers->find($id);
 
         if ($flyer !== false) {
@@ -175,12 +136,5 @@ class FlyersController extends Controller
         return $response;
     
     }
-
-    /* private function getCsvFlyers() {
-        $csv = Reader::createFromPath('flyers/flyers_data.csv', 'r');
-        $csv->setHeaderOffset(0);
-        $stmt = Statement::create();
-        $records = $stmt->process($csv);
-        return $records;
-    } */
+    
 }

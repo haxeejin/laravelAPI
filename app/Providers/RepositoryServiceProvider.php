@@ -14,7 +14,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(FlyerInterFace::class, FlyerRepository::class);
+        $this->app->bind(RepositoryInterface::class, FlyerRepository::class);
     }
 
     /**
